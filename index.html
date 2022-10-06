@@ -30,9 +30,9 @@
 
 		//cubeRotate(5,5);
 
-		const cubePos = cube.position.set(0,0,0);
-		//const cubePos = cube.position;
-		camera.position.set(20,20,20);
+		cube.position.set(0,0,0);
+		const cubePos = new THREE.Vector3(10,2,0);
+		//camera.position.set(10,10,20);
 		camera.lookAt(cubePos);
 		camera.updateProjectionMatrix();
 
