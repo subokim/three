@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>My first three.js app</title>
+	<style>
+		body { margin: 0; }
+		canvas { width: 100%; height: 100% }
+	</style>
+</head>
+<body>
+	<script src="js/three.js"></script>
+	<script>
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		const geometry = new THREE.BoxGeometry(10,15,10,5,5,5);
+		const material = new THREE.MeshBasicMaterial({ color: 0xffff00, wireframe:true, vertexColors:false });
+		const cube = new THREE.Mesh(geometry, material);
+		scene.add(cube);
+
+		function cubeRotate(horizontal_angle, vertical_angle) {
+			cube.rotation.y = (-(Math.PI * 2 * horizontal_angle)/360); //horizontal
+			cube.rotation.x = (-(Math.PI * 2 * vertical_angle)/360); //vertical
+		}
+
+		//cubeRotate(5,5);
+
+		const cubePos = cube.position.set(0,0,0);
+		//const cubePos = cube.position;
+		camera.position.set(20,20,20);
+		camera.lookAt(cubePos);
+		camera.updateProjectionMatrix();
+
+		function animate() {
+			requestAnimationFrame(animate);
+
+			//cube.rotateX(0.01);
+
+			//cube.rotation.x += 0.01;
+			//cube.rotation.y += 0.01;
+			
+			renderer.render(scene, camera);
+		}
+
+		animate();
+	</script>
+</body>
+</html>
